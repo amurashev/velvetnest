@@ -39,7 +39,7 @@ export default async function Article({ post }: { post: POST_QUERYResult }) {
 
   return (
     <div className={styles.box}>
-      <div className={styles.post}>
+      <div className="text">
         <h1>{post.title || "Missed title"}</h1>
         {post.mainImage?.asset?._ref ? (
           <Image

@@ -40,3 +40,20 @@ a {
     color-scheme: dark;
   }
 } */
+
+
+.text {
+  display: block;
+  max-width: 680px;
+
+  h1 {
+    margin-bottom: 32px;
+  }
+
+  p {
+    margin-top: 2.14em;
+    font-size: 20px;
+    margin-bottom: -0.46em;
+    letter-spacing: -0.003em;
+  }
+}
