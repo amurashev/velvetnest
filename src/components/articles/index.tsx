@@ -1,5 +1,4 @@
 import Link from "next/link";
-import styles from "./page.module.css";
 
 import { POSTS_QUERYResult } from "@/../sanity.types";
 
@@ -35,7 +34,7 @@ export function Posts({ posts }: { posts: POSTS_QUERYResult }) {
 export default async function Articles({ posts }: { posts: POSTS_QUERYResult }) {
 
   return (
-    <div className={styles.articles}>
+    <div>
       <h1 className="text-2xl font-bold">Posts</h1>
       <Posts posts={posts} />
     </div>
