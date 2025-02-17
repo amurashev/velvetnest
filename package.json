@@ -7,6 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "type-check": "tsc --noEmit -p tsconfig.json",
     "sanity-extract": "npx sanity schema extract",
     "sanity-generate": "npx sanity typegen generate"
   },
