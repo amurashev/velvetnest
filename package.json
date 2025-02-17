@@ -6,9 +6,12 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "sanity-extract": "npx sanity schema extract",
+    "sanity-generate": "npx sanity typegen generate"
   },
   "dependencies": {
+    "@portabletext/react": "^3.2.1",
     "@sanity/icons": "^3.6.0",
     "@sanity/image-url": "^1.1.0",
     "@sanity/vision": "^3.75.1",
