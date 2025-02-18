@@ -5,11 +5,13 @@
   margin-bottom: 3em;
 }
 
-.textBox {
+.innerBox {
   display: block;
   max-width: 680px;
 }
 
-.mainImageBox {
-  margin-top: 2.0em;
+
+.postsBox {
+  margin-top: 1em;
 }
+

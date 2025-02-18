@@ -1,24 +1,15 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import { sanityFetch } from "@/sanity/lib/client";
+import { POSTS_QUERY } from "@/sanity/lib/queries";
+import { POSTS_QUERYResult } from "@/../sanity.types";
 
-export default function Home() {
+import Articles from "@/components/articles";
+
+export default async function Page() {
+  const posts = await sanityFetch<POSTS_QUERYResult>({
+    query: POSTS_QUERY,
+  });
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-     
-       
-      </main>
-      <footer className={styles.footer}>
-      
-      </footer>
-    </div>
+    <Articles posts={posts} />
   );
 }

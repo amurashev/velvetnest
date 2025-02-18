@@ -1,0 +1,21 @@
+.box {
+  display: flex;
+  justify-content: center;
+}
+
+.mainImageBox {
+  margin-left: 1em;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 1.3em;
+}
+
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

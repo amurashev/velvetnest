@@ -11,8 +11,12 @@ import styles from "./styles.module.css";
 
 // Barebones lazy-loaded image component
 function SampleImageComponent({ value }: { value: SanityImageObjectStub }) {
-  const { width, height } = getImageDimensions(value);
   console.warn(value);
+
+  if (!value) {
+    return null;
+  }
+  const { width, height } = getImageDimensions(value);
   return (
     <Image
       // src={urlBuilder().image(value).width(800).fit("max").auto("format").url()}
@@ -39,32 +43,36 @@ export default async function Article({ post }: { post: POST_QUERYResult }) {
 
   return (
     <div className={styles.box}>
-      <div className="text">
-        <h1>{post.title || "Missed title"}</h1>
-        {post.mainImage?.asset?._ref ? (
-          <Image
-            // className="m-0 w-1/3 rounded-lg flex-shrink-0"
-            src={urlFor(post.mainImage?.asset?._ref)
-              .width(680)
-              .height(520)
-              .fit("max")
-              .auto("format")
-              .url()}
-            width={680}
-            height={520}
-            alt={post.title || ""}
-          />
-        ) : null}
-        {post.body ? (
-          <PortableText
-            value={post.body}
-            components={{
-              types: {
-                image: SampleImageComponent,
-              },
-            }}
-          />
-        ) : null}
+      <div className={styles.textBox}>
+        <div className="text">
+          <h1>{post.title || "Missed title"}</h1>
+          {post.mainImage?.asset?._ref ? (
+            <div className={styles.mainImageBox}>
+              <Image
+                // className="m-0 w-1/3 rounded-lg flex-shrink-0"
+                src={urlFor(post.mainImage?.asset?._ref)
+                  .width(680)
+                  .height(520)
+                  .fit("max")
+                  .auto("format")
+                  .url()}
+                width={680}
+                height={520}
+                alt={post.title || ""}
+              />
+            </div>
+          ) : null}
+          {post.body ? (
+            <PortableText
+              value={post.body}
+              components={{
+                types: {
+                  image: SampleImageComponent,
+                },
+              }}
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );
