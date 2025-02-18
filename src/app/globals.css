@@ -47,7 +47,6 @@ a {
     font-weight: 400;
     font-size: 2.6em;
     line-height: 1.1;
-    /* margin-bottom: 32px; */
   }
 
   h2 {
@@ -67,12 +66,5 @@ a {
     font-size: 1.1em;
     line-height: 1.6;
     margin-bottom: 1em;
-    /* letter-spacing: -0.003em; */
-    /* 
-    margin-top: 2.14em; */
-  }
-
-  img {
-    /* margin-top: 2.14em; */
   }
 }

@@ -13,3 +13,12 @@
 .mainImageBox {
   margin-top: 2.0em;
 }
+
+.imageBox {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  position: relative !important;
+}
