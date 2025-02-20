@@ -28,8 +28,6 @@ export default async function PostPage({
     },
   });
 
-  console.warn(post);
-
   return (
     <div className={styles.box}>
       <div className={styles.container}>

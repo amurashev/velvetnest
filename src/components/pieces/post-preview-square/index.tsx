@@ -32,6 +32,7 @@ export default function PostPreviewSquare({
             .url()}
           width={292}
           height={292}
+        loading="lazy"
           // style={{
           //   objectFit: 'cover'
           // }}

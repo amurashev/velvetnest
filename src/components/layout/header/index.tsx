@@ -26,7 +26,6 @@ const MENU = [
 export default function Header() {
   const pathname = usePathname();
 
-  console.warn(pathname);
   return (
     <header className={styles.box}>
       <div className={styles.logoBox}>

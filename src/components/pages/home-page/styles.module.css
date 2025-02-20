@@ -1,4 +1,14 @@
 .box {
+
+}
+
+.bgBox {
+  height: 500px;
+  width: 100%;
+  position: relative;
+}
+
+.contentBox {
   display: flex;
   justify-content: center;
   margin-top: 3em;

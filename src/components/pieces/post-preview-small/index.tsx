@@ -32,6 +32,7 @@ export default function PostPreviewSmall({
               .url()}
             width={270}
             height={200}
+            loading="lazy"
             alt={post.title || ""}
           />
         </div>

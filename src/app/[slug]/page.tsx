@@ -75,6 +75,9 @@ export default async function Page({ params }: { params: Props["params"] }) {
 
   const posts = await sanityFetch<LATEST_POSTS_FOR_POST_QUERYResult>({
     query: LATEST_POSTS_FOR_POST_QUERY,
+    params: {
+      id: post?._id,
+    },
   });
 
   if (!post) {
