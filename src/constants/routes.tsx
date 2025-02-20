@@ -11,3 +11,4 @@ type BlogPostRoute = BaseRoute<{
 export const homePage = route('/')
 
 export const blogPostRoute = route<BlogPostRoute>('/[slug]')
+export const categoryRoute = route<BlogPostRoute>('/category/[slug]')
