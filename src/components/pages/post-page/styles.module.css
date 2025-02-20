@@ -17,6 +17,11 @@
   line-height: 1.1;
 }
 
+.category {
+  font-weight: 400;
+  font-size: 1.2em;
+}
+
 .containerInner {
   margin-top: 1em;
 }

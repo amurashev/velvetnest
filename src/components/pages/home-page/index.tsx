@@ -1,6 +1,6 @@
 import { LATEST_POSTS_QUERYResult } from "@/../sanity.types";
 
-import PostPreview from "../../pieces/post-preview";
+import PostPreviewSquare from "@/components/pieces/post-preview-square";
 
 import styles from "./styles.module.css";
 
@@ -14,7 +14,11 @@ export default async function HomePage({
       <div className={styles.innerBox}>
         <div className={styles.postsBox}>
           {posts.map((post) => {
-            return <PostPreview key={post._id} post={post} />;
+            return (
+              <div key={post._id}>
+                <PostPreviewSquare post={post} />
+              </div>
+            );
           })}
         </div>
       </div>

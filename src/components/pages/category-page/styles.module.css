@@ -1,8 +1,18 @@
 .box {
   display: flex;
   justify-content: center;
-  margin-top: 3em;
+  margin-top: 2em;
   margin-bottom: 3em;
+}
+
+.titleBox {
+  display: flex;
+  justify-content: center;
+}
+
+.title {
+  font-weight: 400;
+  font-size: 2.6em;
 }
 
 .innerBox {
@@ -12,10 +22,6 @@
 }
 
 .postsBox {
-  width: 100%;
-  margin-top: 1em;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
+  margin-top: 2em;
 }
 

@@ -1,6 +1,6 @@
 .box {
   /* height: 50px; */
-  border-bottom: 1px solid #999;
+  border-bottom: 1px solid #ddd;
   /* padding: 2em 1em; */
   /* display: flex;
   align-items: center; */
@@ -11,8 +11,37 @@
   justify-content: center;
 }
 
+.menuBox {
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: center;
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+}
+
+.menuItem {
+  font-size: 1.25em;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+
+  & + & {
+    margin-left: 1em;
+  }
+
+  &:hover {
+    border-color: black;
+  }
+}
+
+.menuItemIsActive {
+  border-color: black;
+}
+
 .link {
-  font-size: 1.6em;
-  color: #cd538d;
-  font-weight: 700;
+  display: block;
+  padding: 0.5em 1em;
+  height: 100%;
 }

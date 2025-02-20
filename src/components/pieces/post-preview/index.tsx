@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { toPlainText } from "@portabletext/react";
 
-import { ALL_POSTS_QUERYResult } from "@/../sanity.types";
+import { LATEST_POSTS_QUERYResult } from "@/../sanity.types";
 
 import { urlFor } from "@/sanity/lib/image";
 import { blogPostRoute } from "@/constants/routes";
@@ -12,7 +12,7 @@ import styles from "./styles.module.css";
 export default function PostPreview({
   post,
 }: {
-  post: ALL_POSTS_QUERYResult[0];
+  post: LATEST_POSTS_QUERYResult[0];
 }) {
   const blogPostUrl = blogPostRoute.getUrl({
     params: {

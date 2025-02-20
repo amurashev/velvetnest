@@ -282,8 +282,14 @@ export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: ALL_POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, body, mainImage, publishedAt}
+// Query: *[_type == "post" && defined(slug.current)] | order(_createdAt asc){  _id, slug}
 export type ALL_POSTS_QUERYResult = Array<{
+  _id: string;
+  slug: Slug | null;
+}>;
+// Variable: LATEST_POSTS_FOR_CATEGORY_QUERY
+// Query: *[_type == "post" && category->slug.current == $slug][0...12]{  _id, title, slug, body, mainImage, publishedAt, category, category->{    _id,     slug,    title  }, }
+export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -330,6 +336,11 @@ export type ALL_POSTS_QUERYResult = Array<{
     _type: "image";
   } | null;
   publishedAt: string | null;
+  category: {
+    _id: string;
+    slug: Slug | null;
+    title: string | null;
+  } | null;
 }>;
 // Variable: LATEST_POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, body, mainImage, publishedAt}
@@ -401,7 +412,7 @@ export type LATEST_POSTS_FOR_POST_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id, slug, title, body, mainImage, publishedAt, category->{    _id,     slug,    title  }, }
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id, slug, title, body, mainImage, publishedAt, category, category->{    _id,     slug,    title  }, }
 export type POST_QUERYResult = {
   _id: string;
   slug: Slug | null;
@@ -455,13 +466,23 @@ export type POST_QUERYResult = {
     title: string | null;
   } | null;
 } | null;
+// Variable: FULL_CATEGORY_QUERY
+// Query: *[_type == "category" && slug.current == $slug][0]{  _id, slug, title}
+export type FULL_CATEGORY_QUERYResult = {
+  _id: string;
+  slug: Slug | null;
+  title: string | null;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, body, mainImage, publishedAt\n}": ALL_POSTS_QUERYResult | LATEST_POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)] | order(_createdAt asc){\n  _id, slug\n}": ALL_POSTS_QUERYResult;
+    "*[_type == \"post\" && category->slug.current == $slug][0...12]{\n  _id, title, slug, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": LATEST_POSTS_FOR_CATEGORY_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, body, mainImage, publishedAt\n}": LATEST_POSTS_QUERYResult;
     "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt, category->{\n    _id, \n    slug,\n    title\n  }, \n}": POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": POST_QUERYResult;
+    "*[_type == \"category\" && slug.current == $slug][0]{\n  _id, slug, title\n}": FULL_CATEGORY_QUERYResult;
   }
 }
