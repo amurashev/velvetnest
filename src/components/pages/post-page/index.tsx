@@ -4,8 +4,8 @@ import PostPreviewSmall from "@/components/pieces/post-preview-small";
 import { POST_QUERYResult, LATEST_POSTS_FOR_POST_QUERYResult } from "@/../sanity.types";
 
 import styles from "./styles.module.css";
-import Link from "next/link";
-import { categoryRoute } from "@/constants/routes";
+// import Link from "next/link";
+// import { categoryRoute } from "@/constants/routes";
 
 export default async function PostPage({
   post,
