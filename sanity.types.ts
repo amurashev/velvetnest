@@ -281,9 +281,9 @@ export type SanityImageMetadata = {
 export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Author | Category | Slug | BlockContent | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
-// Variable: POSTS_QUERY
+// Variable: ALL_POSTS_QUERY
 // Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, body, mainImage, publishedAt}
-export type POSTS_QUERYResult = Array<{
+export type ALL_POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
@@ -331,9 +331,80 @@ export type POSTS_QUERYResult = Array<{
   } | null;
   publishedAt: string | null;
 }>;
+// Variable: LATEST_POSTS_QUERY
+// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, body, mainImage, publishedAt}
+export type LATEST_POSTS_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  body: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
+    listItem?: "bullet";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  } | {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+    _key: string;
+  }> | null;
+  mainImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+  publishedAt: string | null;
+}>;
+// Variable: LATEST_POSTS_FOR_POST_QUERY
+// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage}
+export type LATEST_POSTS_FOR_POST_QUERYResult = Array<{
+  _id: string;
+  title: string | null;
+  slug: Slug | null;
+  mainImage: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    alt?: string;
+    _type: "image";
+  } | null;
+}>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  title, body, mainImage, publishedAt}
+// Query: *[_type == "post" && slug.current == $slug][0]{  _id, slug, title, body, mainImage, publishedAt}
 export type POST_QUERYResult = {
+  _id: string;
+  slug: Slug | null;
   title: string | null;
   body: Array<{
     children?: Array<{
@@ -384,7 +455,8 @@ export type POST_QUERYResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, body, mainImage, publishedAt\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  title, body, mainImage, publishedAt\n}": POST_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, body, mainImage, publishedAt\n}": ALL_POSTS_QUERYResult | LATEST_POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt\n}": POST_QUERYResult;
   }
 }

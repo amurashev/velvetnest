@@ -1,0 +1,8 @@
+.imageBox {
+  position: relative;
+  width: 100%;
+}
+
+.image {
+  position: relative !important;
+}

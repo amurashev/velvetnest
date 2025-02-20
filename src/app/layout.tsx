@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Bodoni_Moda } from "next/font/google";
 
 import "./globals.css";
-import Header from "@/components/header";
+import Header from "@/components/layout/header";
 
 const font = Bodoni_Moda({
   variable: "--font-main",

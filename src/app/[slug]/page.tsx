@@ -3,16 +3,24 @@
 import { toPlainText } from "@portabletext/react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { POSTS_QUERY, POST_QUERY } from "@/sanity/lib/queries";
+import {
+  ALL_POSTS_QUERY,
+  LATEST_POSTS_FOR_POST_QUERY,
+  POST_QUERY,
+} from "@/sanity/lib/queries";
 import { sanityFetch } from "@/sanity/lib/client";
 import { client } from "@/sanity/lib/client";
 
-import { POSTS_QUERYResult, POST_QUERYResult } from "@/../sanity.types";
-import Article from "@/components/article";
+import {
+  ALL_POSTS_QUERYResult,
+  LATEST_POSTS_FOR_POST_QUERYResult,
+  POST_QUERYResult,
+} from "@/../sanity.types";
+import PostPage from "@/components/pages/post-page";
 
 export async function generateStaticParams() {
-  const posts = await client.fetch<POSTS_QUERYResult>(
-    POSTS_QUERY,
+  const posts = await client.fetch<ALL_POSTS_QUERYResult>(
+    ALL_POSTS_QUERY,
     {},
     { perspective: "published" }
   );
@@ -65,9 +73,13 @@ export default async function Page({ params }: { params: Props["params"] }) {
     },
   });
 
+  const posts = await sanityFetch<LATEST_POSTS_FOR_POST_QUERYResult>({
+    query: LATEST_POSTS_FOR_POST_QUERY,
+  });
+
   if (!post) {
     return notFound();
   }
 
-  return <Article post={post} />;
+  return <PostPage post={post} posts={posts} />;
 }

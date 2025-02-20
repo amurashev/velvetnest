@@ -1,0 +1,51 @@
+.box {
+  display: flex;
+  justify-content: center;
+  margin-top: 3em;
+  margin-bottom: 3em;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  padding: 0 1em;
+}
+
+.h1 {
+  font-weight: 400;
+  font-size: 2.6em;
+  line-height: 1.1;
+}
+
+.containerInner {
+  margin-top: 1em;
+}
+
+.postBox {
+  flex-grow: 1;
+}
+
+.sidebarBox {
+  margin-top: 2em;
+}
+
+.posts {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 3em;
+}
+
+
+@media(min-width: 960px) {
+  .containerInner {
+    display: flex;
+    margin-top: 2em;
+  }
+  
+  .sidebarBox {
+    width: 30%;
+    flex-shrink: 0;
+    margin-left: 2em;
+    margin-top: 0;
+  }
+}

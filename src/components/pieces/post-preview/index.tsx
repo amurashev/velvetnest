@@ -1,15 +1,25 @@
 import Link from "next/link";
 import Image from "next/image";
-
-import { POSTS_QUERYResult } from "@/../sanity.types";
-
 import { toPlainText } from "@portabletext/react";
+
+import { ALL_POSTS_QUERYResult } from "@/../sanity.types";
+
 import { urlFor } from "@/sanity/lib/image";
+import { blogPostRoute } from "@/constants/routes";
 
 import styles from "./styles.module.css";
 
-export default function Post({ post }: { post: POSTS_QUERYResult[0] }) {
-  const blogPostUrl = post?.slug?.current as string;
+export default function PostPreview({
+  post,
+}: {
+  post: ALL_POSTS_QUERYResult[0];
+}) {
+  const blogPostUrl = blogPostRoute.getUrl({
+    params: {
+      slug: post?.slug?.current as string,
+    },
+  });
+
   return (
     <Link href={blogPostUrl} className={styles.box} key={post._id}>
       <div>
