@@ -14,7 +14,7 @@ export default async function HomePage({
     <div className={styles.box}>
       <div className={styles.bgBox}>
         <Image
-          src="/bg/bg3.png"
+          src="/bg/bg3.jpg"
           alt="Background"
           loading="lazy"
           fill
