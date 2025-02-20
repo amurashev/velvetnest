@@ -504,6 +504,16 @@
         },
         "optional": true
       },
+      "tags": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "array",
+          "of": {
+            "type": "string"
+          }
+        },
+        "optional": true
+      },
       "publishedAt": {
         "type": "objectAttribute",
         "value": {

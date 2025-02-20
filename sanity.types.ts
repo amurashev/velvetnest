@@ -100,6 +100,7 @@ export type Post = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "category";
   };
+  tags?: Array<string>;
   publishedAt?: string;
   body?: Array<{
     children?: Array<{
