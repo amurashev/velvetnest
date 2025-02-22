@@ -1,5 +1,5 @@
 .box {
-  border-bottom: 1px solid #ddd;
+  /* border-bottom: 1px solid #ddd; */
 }
 
 .logoBox {
@@ -8,9 +8,10 @@
 }
 
 .menuBox {
-  border-top: 1px solid #ddd;
+  /* border-top: 1px solid #ddd; */
   display: flex;
   justify-content: center;
+  background-color: #3f3f3f;
 }
 
 .menu {
@@ -28,16 +29,17 @@
   }
 
   &:hover {
-    border-color: black;
+    border-color: white;
   }
 }
 
 .menuItemIsActive {
-  border-color: black;
+  border-color: white;
 }
 
 .link {
   display: block;
   padding: 0.5em 1em;
   height: 100%;
+  color: #ffffff;
 }

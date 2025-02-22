@@ -5,23 +5,14 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 
 import { categoryRoute } from "@/constants/routes";
+import CATEGORIES from "@/constants/categories";
 
 import styles from "./styles.module.css";
 
-const MENU = [
-  {
-    url: categoryRoute.getUrl({ params: { slug: "interior" } }),
-    label: "Interior",
-  },
-  {
-    url: categoryRoute.getUrl({ params: { slug: "home-decor" } }),
-    label: "Home decor",
-  },
-  {
-    url: categoryRoute.getUrl({ params: { slug: "food" } }),
-    label: "Food",
-  },
-];
+const MENU = CATEGORIES.map((item) => ({
+  url: categoryRoute.getUrl({ params: { slug: item.slug } }),
+  label: item.label,
+}));
 
 export default function Header() {
   const pathname = usePathname();
@@ -47,7 +38,9 @@ export default function Header() {
                 key={item.url}
                 className={`${styles.menuItem} ${isActive ? styles.menuItemIsActive : ""}`}
               >
-                <Link href={item.url} className={styles.link}>{item.label}</Link>
+                <Link href={item.url} className={styles.link}>
+                  {item.label}
+                </Link>
               </li>
             );
           })}
