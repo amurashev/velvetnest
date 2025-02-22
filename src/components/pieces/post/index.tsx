@@ -1,10 +1,10 @@
 /* eslint-disable camelcase, no-underscore-dangle */
 
-import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { urlFor } from "@/sanity/lib/image";
 
 import PostImage from "@/components/pieces/post-image";
+import AssetImage from "@/components/ui/asset-image";
 
 import { POST_QUERYResult } from "@/../sanity.types";
 
@@ -29,19 +29,19 @@ export default async function PostEntire({ post }: { post: POST_QUERYResult }) {
     <div className="text">
       {post.mainImage?.asset?._ref ? (
         <div className={styles.mainImageBox}>
-          <Image
+          <AssetImage
             src={urlFor(post.mainImage?.asset?._ref)
-              .width(680)
-              .height(520)
+              .width(700)
+              .height(467)
               .fit("max")
               .auto("format")
               .url()}
-            layout='fill'
-            // width={680}
-            // height={520}
-            loading="lazy"
+            fill
             alt={post.title || ""}
             title={post.title || ""}
+            // style={{
+            //   aspectRatio: 0.66,
+            // }}
           />
         </div>
       ) : null}

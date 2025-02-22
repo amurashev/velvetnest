@@ -1,8 +1,8 @@
 /* eslint-disable camelcase, no-underscore-dangle */
 
-import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
 import { getImageDimensions, SanityImageObjectStub } from "@sanity/asset-utils";
+import AssetImage from "@/components/ui/asset-image";
 
 import styles from "./styles.module.css";
 
@@ -18,24 +18,27 @@ function PostImage({
     return null;
   }
 
-  const IMAGE_WIDTH = 680;
+  const IMAGE_WIDTH = 700;
 
   const { width, height } = getImageDimensions(value);
   const title = (value.alt as string) || "";
+  const src = urlFor(value.asset)
+    .width(IMAGE_WIDTH)
+    // .fit("max")
+    .auto("format")
+    .url();
+  const aspectRatio = width / height
 
   return (
     <div className={styles.imageBox}>
-      <Image
-        src={urlFor(value.asset)
-          .width(IMAGE_WIDTH)
-          .fit("max")
-          .auto("format")
-          .url()}
+      <AssetImage
+        src={src}
         alt={title}
         title={title}
         className={styles.image}
-        fill
-        loading="lazy"
+        // fill
+        width={IMAGE_WIDTH}
+        height={IMAGE_WIDTH * aspectRatio}
         style={{
           display: isInline ? "inline-block" : "block",
           // Avoid jumping around with aspect-ratio CSS property
@@ -46,4 +49,4 @@ function PostImage({
   );
 }
 
-export default PostImage
+export default PostImage;

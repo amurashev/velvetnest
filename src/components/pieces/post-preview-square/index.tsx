@@ -1,10 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
 
 import { LATEST_POSTS_QUERYResult } from "@/../sanity.types";
 
 import { urlFor } from "@/sanity/lib/image";
 import { blogPostRoute } from "@/constants/routes";
+import AssetImage from "@/components/ui/asset-image";
 
 import styles from "./styles.module.css";
 
@@ -23,20 +23,14 @@ export default function PostPreviewSquare({
     <Link href={blogPostUrl} className={styles.box} key={post._id}>
       {post.mainImage?.asset?._ref ? (
         <div className={styles.mainImageBox}>
-          <Image
+          <AssetImage
             src={urlFor(post.mainImage?.asset?._ref)
               .width(400)
               .height(400)
               .fit("max")
               .auto("format")
               .url()}
-            // width={280}
-            // height={280}
             fill
-            loading="lazy"
-            // style={{
-            //   objectFit: 'cover'
-            // }}
             alt={post.title || ""}
           />
         </div>
