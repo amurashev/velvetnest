@@ -1,0 +1,42 @@
+.contentBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  padding: 0 1em;
+  padding-bottom: 4em;
+}
+
+.innerBox {
+  display: block;
+  max-width: 1078px;
+  width: 100%;
+}
+
+.postsBox {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 32px;
+}
+
+@media(min-width: 600px) { 
+  .contentBox {
+    margin-top: 1em;
+  }
+  
+  .postsBox {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+}
+
+@media(min-width: 760px) { 
+  .contentBox {
+    margin-top: 3em;
+  }
+  
+  .postsBox {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+}

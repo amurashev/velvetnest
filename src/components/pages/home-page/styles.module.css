@@ -7,25 +7,3 @@
   width: 100%;
   position: relative;
 }
-
-.contentBox {
-  display: flex;
-  justify-content: center;
-  margin-top: 3em;
-  margin-bottom: 3em;
-}
-
-.innerBox {
-  display: block;
-  max-width: 900px;
-  width: 100%;
-}
-
-.postsBox {
-  width: 100%;
-  margin-top: 1em;
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 12px;
-}
-

@@ -3,10 +3,14 @@
 }
 
 .mainImageBox {
+  position: relative;
+  padding-bottom: 100%;
   /* margin-left: 1em; */
 }
 
 .title {
   font-weight: 700;
-  font-size: 1.3em;
+  font-size: 1.4em;
+  line-height: 1.4;
+  margin-top: 0.2em;
 }

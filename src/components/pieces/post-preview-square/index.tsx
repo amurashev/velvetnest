@@ -21,28 +21,29 @@ export default function PostPreviewSquare({
 
   return (
     <Link href={blogPostUrl} className={styles.box} key={post._id}>
-    {post.mainImage?.asset?._ref ? (
-      <div className={styles.mainImageBox}>
-        <Image
-          src={urlFor(post.mainImage?.asset?._ref)
-            .width(292)
-            .height(292)
-            // .fit("max")
-            // .auto("format")
-            .url()}
-          width={292}
-          height={292}
-        loading="lazy"
-          // style={{
-          //   objectFit: 'cover'
-          // }}
-          alt={post.title || ""}
-        />
+      {post.mainImage?.asset?._ref ? (
+        <div className={styles.mainImageBox}>
+          <Image
+            src={urlFor(post.mainImage?.asset?._ref)
+              .width(400)
+              .height(400)
+              .fit("max")
+              .auto("format")
+              .url()}
+            // width={280}
+            // height={280}
+            fill
+            loading="lazy"
+            // style={{
+            //   objectFit: 'cover'
+            // }}
+            alt={post.title || ""}
+          />
+        </div>
+      ) : null}
+      <div>
+        <div className={styles.title}>{post?.title as string}</div>
       </div>
-    ) : null}
-    <div>
-      <div className={styles.title}>{post?.title as string}</div>
-    </div>
-  </Link>
+    </Link>
   );
 }

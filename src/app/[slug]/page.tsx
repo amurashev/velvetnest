@@ -77,6 +77,7 @@ export default async function Page({ params }: { params: Props["params"] }) {
     query: LATEST_POSTS_FOR_POST_QUERY,
     params: {
       id: post?._id,
+      slug: post?.category?.slug?.current
     },
   });
 

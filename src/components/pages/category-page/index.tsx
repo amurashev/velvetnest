@@ -3,7 +3,7 @@ import {
   FULL_CATEGORY_QUERYResult,
 } from "@/../sanity.types";
 
-import PostPreviewSquare from "@/components/pieces/post-preview-square";
+import PostsList from "@/components/pieces/posts-list";
 
 import styles from "./styles.module.css";
 
@@ -20,11 +20,8 @@ export default async function CategoryPage({
         <div className={styles.titleBox}>
           <h1 className={styles.title}>{category?.title}</h1>
         </div>
-        <div className={styles.postsBox}>
-          {posts.map((post) => {
-            return <PostPreviewSquare key={post._id} post={post} />;
-          })}
-        </div>
+
+        <PostsList posts={posts} />
       </div>
     </div>
   );

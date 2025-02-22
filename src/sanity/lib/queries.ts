@@ -16,7 +16,7 @@ export const LATEST_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current
   _id, title, slug, body, mainImage, publishedAt
 }`;
 
-export const LATEST_POSTS_FOR_POST_QUERY = groq`*[_type == "post" && defined(slug.current) && _id != $id][0...3]{
+export const LATEST_POSTS_FOR_POST_QUERY = groq`*[_type == "post" && defined(slug.current) && category->slug.current == $slug && _id != $id][0...3]{
   _id, title, slug, mainImage
 }`;
 
