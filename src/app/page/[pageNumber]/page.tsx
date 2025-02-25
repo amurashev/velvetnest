@@ -22,12 +22,12 @@ export async function generateStaticParams() {
 
   const pagesNumber = Math.ceil(count / PAGE_SIZE);
 
-  const pages = Array.from({ length: pagesNumber }, (_, i) => i + 1)//.map((item)
-  pages.shift()
+  const pages = Array.from({ length: pagesNumber }, (_, i) => i + 1);
+  pages.shift();
 
-  return pages.map(num => ({
-    pagesNumber: num,
-  }))
+  return pages.map((num) => ({
+    pageNumber: String(num),
+  }));
 }
 
 type Props = {
@@ -40,8 +40,8 @@ export default async function Page({ params }: { params: Props["params"] }) {
     query: LATEST_POSTS_QUERY,
     params: {
       start: PAGE_SIZE * (Number(pageNumber) - 1),
-      end: PAGE_SIZE * Number(pageNumber)
-    }
+      end: PAGE_SIZE * Number(pageNumber),
+    },
   });
 
   const count = await sanityFetch<ALL_POSTS_COUNT_QUERYResult>({
