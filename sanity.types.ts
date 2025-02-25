@@ -287,42 +287,15 @@ export type ALL_POSTS_QUERYResult = Array<{
   _id: string;
   slug: Slug | null;
 }>;
+// Variable: ALL_POSTS_COUNT_QUERY
+// Query: count(*[_type == "post" && defined(slug.current)])
+export type ALL_POSTS_COUNT_QUERYResult = number;
 // Variable: LATEST_POSTS_FOR_CATEGORY_QUERY
-// Query: *[_type == "post" && category->slug.current == $slug][0...12]{  _id, title, slug, body, mainImage, publishedAt, category, category->{    _id,     slug,    title  }, }
+// Query: *[_type == "post" && category->slug.current == $slug] | order(publishedAt) [0...3]{  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{    _id,     slug,    title  }, }
 export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
   mainImage: {
     asset?: {
       _ref: string;
@@ -336,6 +309,7 @@ export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
     _type: "image";
   } | null;
   publishedAt: string | null;
+  _createdAt: string;
   category: {
     _id: string;
     slug: Slug | null;
@@ -343,41 +317,11 @@ export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: LATEST_POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, body, mainImage, publishedAt}
+// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt) [$start...$end]{  _id, title, slug, mainImage, publishedAt, _createdAt}
 export type LATEST_POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
   slug: Slug | null;
-  body: Array<{
-    children?: Array<{
-      marks?: Array<string>;
-      text?: string;
-      _type: "span";
-      _key: string;
-    }>;
-    style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "normal";
-    listItem?: "bullet";
-    markDefs?: Array<{
-      href?: string;
-      _type: "link";
-      _key: string;
-    }>;
-    level?: number;
-    _type: "block";
-    _key: string;
-  } | {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    alt?: string;
-    _type: "image";
-    _key: string;
-  }> | null;
   mainImage: {
     asset?: {
       _ref: string;
@@ -391,9 +335,10 @@ export type LATEST_POSTS_QUERYResult = Array<{
     _type: "image";
   } | null;
   publishedAt: string | null;
+  _createdAt: string;
 }>;
 // Variable: LATEST_POSTS_FOR_POST_QUERY
-// Query: *[_type == "post" && defined(slug.current)][0...12]{  _id, title, slug, mainImage}
+// Query: *[_type == "post" && defined(slug.current) && category->slug.current == $slug && _id != $id][0...3]{  _id, title, slug, mainImage}
 export type LATEST_POSTS_FOR_POST_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -479,9 +424,10 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)] | order(_createdAt asc){\n  _id, slug\n}": ALL_POSTS_QUERYResult;
-    "*[_type == \"post\" && category->slug.current == $slug][0...12]{\n  _id, title, slug, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": LATEST_POSTS_FOR_CATEGORY_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, body, mainImage, publishedAt\n}": LATEST_POSTS_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current)][0...12]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
+    "count(*[_type == \"post\" && defined(slug.current)])": ALL_POSTS_COUNT_QUERYResult;
+    "*[_type == \"post\" && category->slug.current == $slug] | order(publishedAt) [0...3]{\n  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": LATEST_POSTS_FOR_CATEGORY_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)] | order(publishedAt) [$start...$end]{\n  _id, title, slug, mainImage, publishedAt, _createdAt\n}": LATEST_POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current) && category->slug.current == $slug && _id != $id][0...3]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": POST_QUERYResult;
     "*[_type == \"category\" && slug.current == $slug][0]{\n  _id, slug, title\n}": FULL_CATEGORY_QUERYResult;
   }

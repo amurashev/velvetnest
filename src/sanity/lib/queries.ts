@@ -4,15 +4,17 @@ export const ALL_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] 
   _id, slug
 }`;
 
+export const ALL_POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug.current)])`;
+
 export const LATEST_POSTS_FOR_CATEGORY_QUERY = groq`*[_type == "post" && category->slug.current == $slug] | order(publishedAt) [0...3]{
-  _id, title, slug, mainImage, publishedAt, category, category->{
+  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{
     _id, 
     slug,
     title
   }, 
 }`;
 
-export const LATEST_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | order(publishedAt) [0...12]{
+export const LATEST_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | order(publishedAt) [$start...$end]{
   _id, title, slug, mainImage, publishedAt, _createdAt
 }`;
 

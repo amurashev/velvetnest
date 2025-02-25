@@ -25,11 +25,11 @@ export default function PostPreview({
       <div>
         <div className={styles.title}>{post?.title as string}</div>
 
-        {post.body && post.body.length > 0 && (
+        {/* {post.body && post.body.length > 0 && (
           <p className={styles.text}>
             {post.body ? toPlainText(post.body).slice(0, 255) : ""}
           </p>
-        )}
+        )} */}
       </div>
       {post.mainImage?.asset?._ref ? (
         <div className={styles.mainImageBox}>
