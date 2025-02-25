@@ -14,7 +14,7 @@ export const LATEST_POSTS_FOR_CATEGORY_QUERY = groq`*[_type == "post" && categor
   }, 
 }`;
 
-export const LATEST_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | order(publishedAt) [$start...$end]{
+export const LATEST_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] | order(_createdAt desc) [$start...$end]{
   _id, title, slug, mainImage, publishedAt, _createdAt
 }`;
 

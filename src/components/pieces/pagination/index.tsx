@@ -19,14 +19,11 @@ export default async function Pagination({
       <div className={styles.paginationBoxInner}>
         <div className={styles.items}>
           {Array.from({ length: pages }, (_, i) => i + 1).map((item) => (
-            <>
+            <div key={item} className={styles.item}>
               {Number(item) === Number(pageNumber) ? (
-                <strong className={styles.item} key={item}>
-                  {item}
-                </strong>
+                <strong>{item}</strong>
               ) : (
                 <Link
-                  key={item} // eslint-disable-line react/no-array-index-key
                   href={
                     item === 1
                       ? "/"
@@ -34,12 +31,11 @@ export default async function Pagination({
                           params: { pageNumber: String(item) },
                         })
                   }
-                  className={styles.item}
                 >
                   {item}
                 </Link>
               )}
-            </>
+            </div>
           ))}
         </div>
       </div>
