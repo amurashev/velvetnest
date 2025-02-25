@@ -6,7 +6,7 @@ export const ALL_POSTS_QUERY = groq`*[_type == "post" && defined(slug.current)] 
 
 export const ALL_POSTS_COUNT_QUERY = groq`count(*[_type == "post" && defined(slug.current)])`;
 
-export const LATEST_POSTS_FOR_CATEGORY_QUERY = groq`*[_type == "post" && category->slug.current == $slug] | order(publishedAt) [0...21]{
+export const LATEST_POSTS_FOR_CATEGORY_QUERY = groq`*[_type == "post" && category->slug.current == $slug] | order(_createdAt desc) [0...21]{
   _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{
     _id, 
     slug,
