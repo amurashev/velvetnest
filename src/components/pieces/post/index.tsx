@@ -9,6 +9,7 @@ import AssetImage from "@/components/ui/asset-image";
 import { POST_QUERYResult } from "@/../sanity.types";
 
 import styles from "./styles.module.css";
+import getIsMobile from "@/utils/mobile";
 
 // function countWords(str: string) {
 //   return str.trim().split(/\s+/).length;
@@ -25,14 +26,18 @@ export default async function PostEntire({ post }: { post: POST_QUERYResult }) {
   // const words = countWords(text);
   // const timeToRead = Math.ceil(words / 200);
 
+  const isMobile = getIsMobile()
+  const width = isMobile ? 400 : 700
+  const height = isMobile ? 266 : 467
+
   return (
     <div className="text">
       {post.mainImage?.asset?._ref ? (
         <div className={styles.mainImageBox}>
           <AssetImage
             src={urlFor(post.mainImage?.asset?._ref)
-              .width(700)
-              .height(467)
+              .width(width)
+              .height(height)
               .fit("max")
               .auto("format")
               .url()}
