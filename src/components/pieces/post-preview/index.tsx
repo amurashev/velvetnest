@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { toPlainText } from "@portabletext/react";
+// import { toPlainText } from "@portabletext/react";
 
 import { LATEST_POSTS_QUERYResult } from "@/../sanity.types";
 
