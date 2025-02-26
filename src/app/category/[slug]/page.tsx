@@ -11,6 +11,8 @@ import {
 
 import CategoryPage from "@/components/pages/category-page";
 
+export const revalidate = 86400 // invalidate every day
+
 type Props = {
   params: Promise<{ slug: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;

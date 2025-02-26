@@ -12,6 +12,8 @@ import {
 import HomePage from "@/components/pages/home-page";
 import { PAGE_SIZE } from "@/constants/main";
 
+export const revalidate = 86400 // invalidate every day
+
 export default async function Page() {
   const posts = await sanityFetch<LATEST_POSTS_QUERYResult>({
     query: LATEST_POSTS_QUERY,

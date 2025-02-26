@@ -13,6 +13,8 @@ import {
 import HomePage from "@/components/pages/home-page";
 import { PAGE_SIZE } from "@/constants/main";
 
+export const revalidate = 86400 // invalidate every day
+
 export async function generateStaticParams() {
   const count = await client.fetch<ALL_POSTS_COUNT_QUERYResult>(
     ALL_POSTS_COUNT_QUERY,
