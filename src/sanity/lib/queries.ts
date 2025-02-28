@@ -22,7 +22,7 @@ export const LATEST_POSTS_FOR_POST_QUERY = groq`*[_type == "post" && defined(slu
   _id, title, slug, mainImage
 }`;
 
-export const POST_QUERY = groq`*[_type == "post" && slug.current == $slug][0]{
+export const POST_QUERY = groq`*[_type == "post" && defined(slug.current) && slug.current == $slug][0]{
   _id, slug, title, body, mainImage, publishedAt, category, category->{
     _id, 
     slug,

@@ -73,13 +73,17 @@ export default async function Page({ params }: { params: Props["params"] }) {
     },
   });
 
-  const posts = await sanityFetch<LATEST_POSTS_FOR_POST_QUERYResult>({
-    query: LATEST_POSTS_FOR_POST_QUERY,
-    params: {
-      id: post?._id,
-      slug: post?.category?.slug?.current
-    },
-  });
+  let posts: LATEST_POSTS_FOR_POST_QUERYResult = [];
+
+  if (post?.category) {
+    posts = await sanityFetch<LATEST_POSTS_FOR_POST_QUERYResult>({
+      query: LATEST_POSTS_FOR_POST_QUERY,
+      params: {
+        id: post?._id,
+        slug: post?.category?.slug?.current,
+      },
+    });
+  }
 
   if (!post) {
     return notFound();
