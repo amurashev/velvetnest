@@ -1,6 +1,6 @@
 :root {
   --background: #F9F7F4;
-  --foreground: #171717;
+  --foreground: #474747;
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -35,6 +35,15 @@ a {
   text-decoration: none;
 }
 
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-header);
+}
+
+ul, p {
+  font-size: 1.1em;
+  line-height: 1.6;
+}
+
 /* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
@@ -43,12 +52,6 @@ a {
 
 
 .text {
-  /* h1 {
-    font-weight: 400;
-    font-size: 2.6em;
-    line-height: 1.1;
-  } */
-
   h2 {
     font-size: 2.0em;
   }
@@ -59,7 +62,7 @@ a {
 
   h2, h3, h4, h5, h6 {
     margin-top: 2em;
-    margin-bottom: 0.75em;
+    margin-bottom: 0.5em;
   }
 
   ul {
@@ -68,8 +71,6 @@ a {
   }
 
   p {
-    font-size: 1.1em;
-    line-height: 1.6;
     margin-bottom: 1em;
   }
 }

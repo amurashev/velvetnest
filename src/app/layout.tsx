@@ -1,11 +1,21 @@
 import type { Metadata } from "next";
-import { Bodoni_Moda } from "next/font/google";
+import {
+  Poppins,
+  DM_Serif_Text
+} from "next/font/google";
 
 import "./globals.css";
 import Header from "@/components/layout/header";
 
-const font = Bodoni_Moda({
+const fontMain = Poppins({
   variable: "--font-main",
+  weight: ["300"],
+  subsets: ["latin"],
+});
+
+const fontHeader = DM_Serif_Text({
+  variable: "--font-header",
+  weight: ["400"],
   subsets: ["latin"],
 });
 
@@ -93,10 +103,13 @@ export default function RootLayout({
         />
         <link rel="manifest" href="/favicon/manifest.json" />
         <meta name="msapplication-TileColor" content="#ffffff" />
-        <meta name="msapplication-TileImage" content="/favicon/ms-icon-144x144.png" />
+        <meta
+          name="msapplication-TileImage"
+          content="/favicon/ms-icon-144x144.png"
+        />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={`${font.variable}`}>
+      <body className={`${fontMain.variable} ${fontHeader.variable}`}>
         <Header />
         <main>{children}</main>
       </body>
