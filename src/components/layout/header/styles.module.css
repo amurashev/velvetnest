@@ -5,13 +5,14 @@
 .logoBox {
   display: flex;
   justify-content: center;
+  padding: 10px 0;
 }
 
 .menuBox {
   /* border-top: 1px solid #ddd; */
   display: flex;
   justify-content: center;
-  background-color: #3f3f3f;
+  background-color: #000000;
 }
 
 .menu {
@@ -42,4 +43,5 @@
   padding: 0.5em 1em;
   height: 100%;
   color: #ffffff;
+  text-transform: uppercase;
 }

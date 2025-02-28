@@ -20,11 +20,12 @@ export default function Header() {
   return (
     <header className={styles.box}>
       <div className={styles.logoBox}>
-        <Link href="/" className={styles.link}>
+        <Link href="/">
           <Image
             src="/logo.png"
             width={260}
-            height={130}
+            height={83}
+            quality={100}
             alt="VelvetNest.Club"
           />
         </Link>

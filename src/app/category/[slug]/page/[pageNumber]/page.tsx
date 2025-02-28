@@ -13,23 +13,16 @@ import {
 
 import CategoryPage from "@/components/pages/category-page";
 import { PAGE_SIZE } from "@/constants/main";
-import CATEGORIES from "@/constants/categories";
 
 export const revalidate = 86400; // invalidate every day
 
-export async function generateStaticParams() {
-  return CATEGORIES.map((category) => ({
-    slug: category.slug,
-  }));
-}
-
 type Props = {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ slug: string; pageNumber: string }>;
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 };
 
 export default async function Page({ params }: { params: Props["params"] }) {
-  const { slug } = await params;
+  const { slug, pageNumber } = await params;
   const category = await sanityFetch<FULL_CATEGORY_QUERYResult>({
     query: FULL_CATEGORY_QUERY,
     params: {
@@ -41,8 +34,8 @@ export default async function Page({ params }: { params: Props["params"] }) {
     query: LATEST_POSTS_FOR_CATEGORY_QUERY,
     params: {
       slug,
-      start: 0,
-      end: PAGE_SIZE,
+      start: PAGE_SIZE * (Number(pageNumber) - 1),
+      end: PAGE_SIZE * Number(pageNumber),
     },
   });
 
@@ -58,7 +51,7 @@ export default async function Page({ params }: { params: Props["params"] }) {
       posts={posts}
       category={category}
       count={count}
-      pageNumber={1}
+      pageNumber={Number(pageNumber)}
     />
   );
 }

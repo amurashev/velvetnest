@@ -10,18 +10,14 @@ export default async function PostsList({
   posts: LATEST_POSTS_QUERYResult;
 }) {
   return (
-      <div className={styles.contentBox}>
-        <div className={styles.innerBox}>
-          <div className={styles.postsBox}>
-            {posts.map((post) => {
-              return (
-                <div key={post._id}>
-                  <PostPreviewSquare post={post} />
-                </div>
-              );
-            })}
+    <div className={styles.postsBox}>
+      {posts.map((post) => {
+        return (
+          <div key={post._id}>
+            <PostPreviewSquare post={post} />
           </div>
-        </div>
-      </div>
+        );
+      })}
+    </div>
   );
 }

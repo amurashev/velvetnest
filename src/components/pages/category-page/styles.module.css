@@ -1,27 +1,12 @@
 .box {
   display: flex;
   justify-content: center;
-  margin-top: 2em;
-  margin-bottom: 3em;
 }
 
 .titleBox {
   display: flex;
   justify-content: center;
+  margin-bottom: 1em;
 }
 
-.title {
-  font-weight: 400;
-  font-size: 2.6em;
-}
-
-.innerBox {
-  display: block;
-  max-width: 900px;
-  width: 100%;
-}
-
-.postsBox {
-  margin-top: 2em;
-}
 

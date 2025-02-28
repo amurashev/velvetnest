@@ -1,0 +1,25 @@
+.contentBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 1em;
+  padding: 0 1em;
+  padding-bottom: 4em;
+}
+
+.innerBox {
+  display: block;
+  max-width: 1078px;
+  width: 100%;
+}
+
+@media(min-width: 600px) { 
+  .contentBox {
+    margin-top: 1em;
+  }
+}
+
+@media(min-width: 760px) { 
+  .contentBox {
+    margin-top: 3em;
+  }
+}

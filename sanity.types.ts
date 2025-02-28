@@ -291,7 +291,7 @@ export type ALL_POSTS_QUERYResult = Array<{
 // Query: count(*[_type == "post" && defined(slug.current)])
 export type ALL_POSTS_COUNT_QUERYResult = number;
 // Variable: LATEST_POSTS_FOR_CATEGORY_QUERY
-// Query: *[_type == "post" && category->slug.current == $slug] | order(publishedAt) [0...3]{  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{    _id,     slug,    title  }, }
+// Query: *[_type == "post" && category->slug.current == $slug] | order(_createdAt desc) [$start...$end]{  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{    _id,     slug,    title  }, }
 export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -316,8 +316,11 @@ export type LATEST_POSTS_FOR_CATEGORY_QUERYResult = Array<{
     title: string | null;
   } | null;
 }>;
+// Variable: ALL_POSTS_FOR_CATEGORY_COUNT_QUERY
+// Query: count(*[_type == "post" && defined(slug.current) && category->slug.current == $slug])
+export type ALL_POSTS_FOR_CATEGORY_COUNT_QUERYResult = number;
 // Variable: LATEST_POSTS_QUERY
-// Query: *[_type == "post" && defined(slug.current)] | order(publishedAt) [$start...$end]{  _id, title, slug, mainImage, publishedAt, _createdAt}
+// Query: *[_type == "post" && defined(slug.current)] | order(_createdAt desc) [$start...$end]{  _id, title, slug, mainImage, publishedAt, _createdAt}
 export type LATEST_POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -338,7 +341,7 @@ export type LATEST_POSTS_QUERYResult = Array<{
   _createdAt: string;
 }>;
 // Variable: LATEST_POSTS_FOR_POST_QUERY
-// Query: *[_type == "post" && defined(slug.current) && category->slug.current == $slug && _id != $id][0...3]{  _id, title, slug, mainImage}
+// Query: *[_type == "post" && defined(slug.current) && category->slug.current == $slug && _id != $id]  | order(_createdAt desc) [0...3]{  _id, title, slug, mainImage}
 export type LATEST_POSTS_FOR_POST_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -357,7 +360,7 @@ export type LATEST_POSTS_FOR_POST_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug][0]{  _id, slug, title, body, mainImage, publishedAt, category, category->{    _id,     slug,    title  }, }
+// Query: *[_type == "post" && defined(slug.current) && slug.current == $slug][0]{  _id, slug, title, body, mainImage, publishedAt, category, category->{    _id,     slug,    title  }, }
 export type POST_QUERYResult = {
   _id: string;
   slug: Slug | null;
@@ -425,10 +428,11 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\" && defined(slug.current)] | order(_createdAt asc){\n  _id, slug\n}": ALL_POSTS_QUERYResult;
     "count(*[_type == \"post\" && defined(slug.current)])": ALL_POSTS_COUNT_QUERYResult;
-    "*[_type == \"post\" && category->slug.current == $slug] | order(publishedAt) [0...3]{\n  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": LATEST_POSTS_FOR_CATEGORY_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current)] | order(publishedAt) [$start...$end]{\n  _id, title, slug, mainImage, publishedAt, _createdAt\n}": LATEST_POSTS_QUERYResult;
-    "*[_type == \"post\" && defined(slug.current) && category->slug.current == $slug && _id != $id][0...3]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": POST_QUERYResult;
+    "*[_type == \"post\" && category->slug.current == $slug] | order(_createdAt desc) [$start...$end]{\n  _id, title, slug, mainImage, publishedAt, _createdAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": LATEST_POSTS_FOR_CATEGORY_QUERYResult;
+    "count(*[_type == \"post\" && defined(slug.current) && category->slug.current == $slug])": ALL_POSTS_FOR_CATEGORY_COUNT_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current)] | order(_createdAt desc) [$start...$end]{\n  _id, title, slug, mainImage, publishedAt, _createdAt\n}": LATEST_POSTS_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current) && category->slug.current == $slug && _id != $id]  | order(_createdAt desc) [0...3]{\n  _id, title, slug, mainImage\n}": LATEST_POSTS_FOR_POST_QUERYResult;
+    "*[_type == \"post\" && defined(slug.current) && slug.current == $slug][0]{\n  _id, slug, title, body, mainImage, publishedAt, category, category->{\n    _id, \n    slug,\n    title\n  }, \n}": POST_QUERYResult;
     "*[_type == \"category\" && slug.current == $slug][0]{\n  _id, slug, title\n}": FULL_CATEGORY_QUERYResult;
   }
 }

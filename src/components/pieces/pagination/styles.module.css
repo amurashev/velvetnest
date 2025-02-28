@@ -1,18 +1,5 @@
-.paginationBox {
-  display: flex;
-  justify-content: center;
-  margin-top: 1em;
-  padding: 0 1em;
-  padding-bottom: 4em;
-}
-
-.paginationBoxInner {
-  display: block;
-  max-width: 1078px;
-  width: 100%;
-}
-
 .items {
+  margin-top: 1em;
   display: flex;
   font-size: 1.3em;
 }

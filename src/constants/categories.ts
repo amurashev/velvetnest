@@ -11,6 +11,10 @@ const CATEGORIES = [
     slug: "food",
     label: "Food",
   },
+  {
+    slug: "renovation",
+    label: "Renovation",
+  }
 ];
 
 export default CATEGORIES

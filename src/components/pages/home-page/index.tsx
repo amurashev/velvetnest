@@ -5,6 +5,7 @@ import PostsList from "@/components/pieces/posts-list";
 import Pagination from "@/components/pieces/pagination";
 
 import styles from "./styles.module.css";
+import CardsContainer from "@/components/layout/cards-container";
 
 export default async function HomePage({
   posts,
@@ -29,8 +30,10 @@ export default async function HomePage({
           }}
         />
       </div>
-      <PostsList posts={posts} />
-      <Pagination count={count} pageNumber={pageNumber} />
+      <CardsContainer>
+        <PostsList posts={posts} />
+        <Pagination count={count} pageNumber={pageNumber} type="all" />
+      </CardsContainer>
     </div>
   );
 }
