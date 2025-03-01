@@ -17,6 +17,7 @@ import {
   POST_QUERYResult,
 } from "@/../sanity.types";
 import PostPage from "@/components/pages/post-page";
+import getDeviceType from "@/utils/mobile";
 
 export async function generateStaticParams() {
   const posts = await client.fetch<ALL_POSTS_QUERYResult>(
@@ -64,7 +65,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default async function Page({ params }: { params: Props["params"] }) {
+export default async function Page({  params  }: { params: Props["params"] }) {
+  const deviceType = await getDeviceType()
   const { slug } = await params;
   const post = await sanityFetch<POST_QUERYResult>({
     query: POST_QUERY,
@@ -89,5 +91,5 @@ export default async function Page({ params }: { params: Props["params"] }) {
     return notFound();
   }
 
-  return <PostPage post={post} posts={posts} />;
+  return <PostPage post={post} posts={posts} deviceType={deviceType} />;
 }

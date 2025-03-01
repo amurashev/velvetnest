@@ -9,13 +9,18 @@ import AssetImage from "@/components/ui/asset-image";
 import { POST_QUERYResult } from "@/../sanity.types";
 
 import styles from "./styles.module.css";
-import getIsMobile from "@/utils/mobile";
 
 // function countWords(str: string) {
 //   return str.trim().split(/\s+/).length;
 // }
 
-export default async function PostEntire({ post }: { post: POST_QUERYResult }) {
+export default async function PostEntire({
+  post,
+  deviceType,
+}: {
+  post: POST_QUERYResult;
+  deviceType: "mobile" | "desktop";
+}) {
   if (!post) {
     return null;
   }
@@ -26,9 +31,9 @@ export default async function PostEntire({ post }: { post: POST_QUERYResult }) {
   // const words = countWords(text);
   // const timeToRead = Math.ceil(words / 200);
 
-  const isMobile = getIsMobile()
-  const width = isMobile ? 400 : 700
-  const height = isMobile ? 266 : 467
+  const isMobile = deviceType === "mobile";
+  const width = isMobile ? 400 : 700;
+  const height = isMobile ? 266 : 467;
 
   return (
     <div className="text">

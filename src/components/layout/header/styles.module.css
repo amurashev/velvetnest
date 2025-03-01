@@ -5,7 +5,7 @@
 .logoBox {
   display: flex;
   justify-content: center;
-  padding: 10px 0;
+  padding: 16px 0;
 }
 
 .menuBox {
@@ -18,19 +18,31 @@
 .menu {
   list-style: none;
   display: flex;
+  flex-direction: column;
 }
 
 .menuItem {
-  font-size: 1.25em;
+  font-size: 1.0em;
   border-bottom: 2px solid transparent;
   cursor: pointer;
-
-  & + & {
-    margin-left: 1em;
-  }
+  text-align: center;
 
   &:hover {
     border-color: white;
+  }
+}
+
+
+@media(min-width: 600px) { 
+  .menu {
+    flex-direction: row;
+  }
+  .menuItem {
+
+  font-size: 1.25em;
+    & + & {
+      margin-left: 1em;
+    }
   }
 }
 

@@ -12,8 +12,9 @@ import {
 
 import HomePage from "@/components/pages/home-page";
 import { PAGE_SIZE } from "@/constants/main";
+import getDeviceType from "@/utils/mobile";
 
-export const revalidate = 86400 // invalidate every day
+export const revalidate = 86400; // invalidate every day
 
 export async function generateStaticParams() {
   const count = await client.fetch<ALL_POSTS_COUNT_QUERYResult>(
@@ -37,6 +38,7 @@ type Props = {
 };
 
 export default async function Page({ params }: { params: Props["params"] }) {
+  const deviceType = await getDeviceType();
   const { pageNumber = "2" } = await params;
   const posts = await sanityFetch<LATEST_POSTS_QUERYResult>({
     query: LATEST_POSTS_QUERY,
@@ -51,6 +53,11 @@ export default async function Page({ params }: { params: Props["params"] }) {
   });
 
   return (
-    <HomePage posts={posts} count={count} pageNumber={Number(pageNumber)} />
+    <HomePage
+      posts={posts}
+      count={count}
+      pageNumber={Number(pageNumber)}
+      deviceType={deviceType}
+    />
   );
 }

@@ -11,10 +11,12 @@ export default async function HomePage({
   posts,
   count,
   pageNumber,
+  // deviceType,
 }: {
   posts: LATEST_POSTS_QUERYResult;
   count: number;
   pageNumber: number;
+  deviceType: "mobile" | "desktop"
 }) {
   return (
     <div className={styles.box}>

@@ -14,9 +14,11 @@ import styles from "./styles.module.css";
 export default async function PostPage({
   post,
   posts = [],
+  deviceType,
 }: {
   post: POST_QUERYResult;
   posts: LATEST_POSTS_FOR_POST_QUERYResult;
+  deviceType: "mobile" | "desktop"
 }) {
   if (!post) {
     return null;
@@ -41,7 +43,7 @@ export default async function PostPage({
 
         <div className={styles.containerInner}>
           <div className={styles.postBox}>
-            <PostEntire post={post} />
+            <PostEntire post={post} deviceType={deviceType} />
           </div>
           <div className={styles.sidebarBox}>
             <div className={styles.posts}>
